@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify - Our Playlist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Circular+Std:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Circular Std', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #000;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Spotify Header */
+        .spotify-header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-arrows {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.05);
+        }
+
+        .spotify-logo {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .spotify-icon {
+            width: 32px;
+            height: 32px;
+            background: #1DB954;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 32px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(180deg, #1e3a5f 0%, #000 400px);
+            padding: 80px 32px 40px;
+            text-align: center;
+            margin: -40px -32px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(29, 185, 84, 0.2), transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .playlist-cover {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 32px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .playlist-title {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            position: relative;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .playlist-subtitle {
+            font-size: 18px;
+            color: #b3b3b3;
+            position: relative;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections Container */
+        .sections {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.7s; }
+        .section:nth-child(2) { animation-delay: 1.2s; }
+        .section:nth-child(3) { animation-delay: 1.7s; }
+        .section:nth-child(4) { animation-delay: 2.2s; }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #1DB954;
+        }
+
+        /* Song List */
+        .song-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .song-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .song-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .song-number {
+            width: 24px;
+            text-align: center;
+            color: #b3b3b3;
+            font-size: 14px;
+        }
+
+        .song-info {
+            flex: 1;
+        }
+
+        .song-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .song-artist {
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+
+        .song-memory {
+            font-size: 13px;
+            color: #1DB954;
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        /* Memory Text */
+        .memory-text {
+            background: linear-gradient(135deg, rgba(29, 185, 84, 0.1), rgba(102, 126, 234, 0.1));
+            border-left: 4px solid #1DB954;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 24px 0;
+            line-height: 1.8;
+        }
+
+        /* The Question Section */
+        .question-section {
+            display: none;
+            text-align: center;
+            padding: 80px 20px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        .question-section.active {
+            display: block;
+        }
+
+        .now-playing {
+            font-size: 14px;
+            color: #1DB954;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+            font-weight: 700;
+        }
+
+        .question-text {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 48px;
+            background: linear-gradient(135deg, #1DB954, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .answer-btn {
+            padding: 20px 60px;
+            font-size: 20px;
+            font-weight: 700;
+            border: none;
+            border-radius: 500px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-yes {
+            background: #1DB954;
+            color: white;
+        }
+
+        .btn-yes:hover {
+            background: #1ed760;
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(29, 185, 84, 0.4);
+        }
+
+        .btn-no {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-no:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* Success Screen */
+        .success-screen {
+            display: none;
+            text-align: center;
+            padding: 80px 20px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        .success-screen.active {
+            display: block;
+        }
+
+        .celebration {
+            font-size: 120px;
+            margin-bottom: 32px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .success-title {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            color: #1DB954;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: fadeOut 3s ease-out 5s forwards;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; pointer-events: none; }
+        }
+
+        .scroll-arrow {
+            width: 30px;
+            height: 50px;
+            border: 2px solid #1DB954;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .scroll-arrow::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #1DB954;
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollDown 2s infinite;
+        }
+
+        @keyframes scrollDown {
+            0% { top: 8px; opacity: 1; }
+            100% { top: 32px; opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 20px 40px;
+            }
+
+            .playlist-cover {
+                width: 200px;
+                height: 200px;
+                font-size: 60px;
+            }
+
+            .playlist-title {
+                font-size: 32px;
+            }
+
+            .question-text {
+                font-size: 36px;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+            }
+
+            .answer-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Spotify Header -->
+    <div class="spotify-header">
+        <div class="nav-arrows"> 
+            <button class="nav-btn">◀</button>
+            <button class="nav-btn">▶</button>
+        </div>
+        <div class="spotify-logo">
+            <div class="spotify-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="white">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                </svg>
+            </div>
+            <span>Spotify</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <img class="playlist-cover" src="cat.gif" alt="cover photo">
+        <h1 class="playlist-title">Hey Lover!</h1>
+        <p class="playlist-subtitle">a special playlist for my bratty princess</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="sections" id="sections">
+            
+            <!-- Section 1: The Songs We Shared -->
+            <div class="section">
+                <h2 class="section-title">🎵 Songs</h2>
+                <div class="song-list">
+                    <!-- 
+                        ⭐ TO ADD YOUR SONGS:
+                        1. Replace "Song Name" with the actual song title
+                        2. Replace "Artist Name" with the artist
+                        3. Replace the memory text with your actual memory
+                        4. Optional: Add the Spotify link by wrapping the song-item div with:
+                           <a href="YOUR_SPOTIFY_LINK" target="_blank" style="text-decoration: none; color: inherit;">
+                    -->
+                    <div class="song-item">
+                        <div class="song-number">1</div>
+                        <div class="song-info">
+                            <div class="song-name">carrot anti type beat</div>
+                            <div class="song-artist">by nugs</div>
+                            <div class="song-memory">this made me feel really special. i know you put a lot of thought into this, really appreaciate it"</div>
+                        </div>
+                    </div>
+                    <div class="song-item">
+                        <div class="song-number">2</div>
+                        <div class="song-info">
+                            <div class="song-name">Invisible String</div>
+                            <div class="song-artist">Taylor Swift</div>
+                            <div class="song-memory">IFYKYK</div>
+                        </div>
+                    </div>
+                    <div class="song-item">
+                        <div class="song-number">3</div>
+                        <div class="song-info">
+                            <div class="song-name">i'm perfect for you</div>
+                            <div class="song-artist">aj</div>
+                            <div class="song-memory">:))))</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Memories -->
+            <div class="section">
+                <h2 class="section-title">💭 some of the stuff i have noted down over the past months...</h2>
+                <div class="memory-text">
+                    The first time I heard you sing... immediately became my favorite song...                  
+                </div>
+                <div class="memory-text">
+                    27-10-2026
+                    I like you so much that I want to keep learning more things about you, what interests you, the stuff you like and don't like.
+                    Not just the surface level things, but of course the small details too. I'm genuinely interested in you and I want to understand you better.
+                </div>
+            </div>
+
+            <!-- Section 3: What You Mean to Me -->
+            <div class="section">
+                <h2 class="section-title">💖 What You Mean to Me</h2>
+                <div class="memory-text">
+                    <!-- ⭐ CUSTOMIZE THIS: Express your feelings -->
+                    Talking to you has become my favorite part of every day. You make me smile 
+                    in ways I didn't think were possible through a screen. You're thoughtful, 
+                    funny, caring, and genuinely one of the most amazing people I've ever met.
+                </div>
+            </div>
+
+            <!-- Section 4: Leading to the Question -->
+            <div class="section">
+                <h2 class="section-title">🎯 And So...</h2>
+                <div class="memory-text">
+                    <!-- ⭐ CUSTOMIZE THIS: Your lead-in to the question -->
+                    I've been thinking about this for a while now, and I couldn't find a better 
+                    way to ask than through something we both love. So here it goes...
+                </div>
+            </div>
+
+        </div>
+
+        <!-- The Question -->
+        <div class="question-section" id="questionSection">
+            <div class="now-playing">🎵 Now Playing 🎵</div>
+            <h1 class="question-text">Will you be my girlfriend?</h1>
+            <div class="buttons-container">
+                <button class="answer-btn btn-yes" onclick="handleAnswer('yes')">YES</button>
+                <button class="answer-btn btn-no" onclick="handleAnswer('no')">NO >:(</button>
+            </div>
+        </div>
+
+        <!-- Success Screen -->
+        <div class="success-screen" id="successScreen">
+            <div class="celebration">🎉💕🎊</div>
+            <h1 class="success-title">YIPPPIEEEEE!</h1>
+            <p style="font-size: 24px; color: #b3b3b3; margin-top: 24px;">
+                ENTER TEXT HERE 💕
+            </p>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-arrow"></div>
+    </div>
+
+    <script>
+        // ⭐⭐⭐ IMPORTANT: CONFIGURE YOUR ESP32 IP ADDRESS HERE ⭐⭐⭐
+        const ESP32_IP = 'http://192.168.1.237'; // Change this to your ESP32's IP address
+        
+        let officialTimestamp = null;
+
+        // Scroll reveal for question
+        window.addEventListener('scroll', () => {
+            const sections = document.getElementById('sections');
+            const questionSection = document.getElementById('questionSection');
+            
+            if (sections.getBoundingClientRect().bottom < window.innerHeight) {
+                questionSection.classList.add('active');
+            }
+        });
+
+        // Handle answer
+        async function handleAnswer(answer) {
+            if (answer === 'yes') {
+                // Create timestamp
+                officialTimestamp = new Date();
+                const { timestamp, unixTime } = generatePHTTimestamp();
+                
+                // Show success screen
+                document.getElementById('questionSection').style.display = 'none';
+                document.getElementById('successScreen').classList.add('active');
+                
+                // Send to ESP32
+                await sendToESP32(timestamp, unixTime);
+                
+                // Confetti effect
+                createConfetti();
+            } else {
+                alert('bawal nb magtanong ngaun xddd ang kapal naman ng mukha ko </3');
+            }
+        }
+
+        // Format timestamp
+        // Format timestamp for ESP32
+        function generatePHTTimestamp() {
+            const now = new Date();
+
+            // get current time in UTC+8
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000); // milliseconds
+            const phtTime = new Date(utc + (8*60*60*1000)); // UTC+8
+
+            const month = String(phtTime.getMonth()+1).padStart(2,'0');
+            const day   = String(phtTime.getDate()).padStart(2,'0');
+            const year = phtTime.getFullYear();
+            const hours = String(phtTime.getHours()).padStart(2,'0');
+            const minutes = String(phtTime.getMinutes()).padStart(2,'0');
+            const seconds = String(phtTime.getSeconds()).padStart(2,'0');
+
+            return {
+                timestamp: `${month}/${day}/${year} ${hours}:${minutes}:${seconds}`,
+                unixTime: Math.floor(phtTime.getTime()/1000)
+            };
+        }
+
+        // Send timestamp to ESP32
+        async function sendToESP32(timestamp, unixTime) {
+            try {
+                const response = await fetch(`${ESP32_IP}/timestamp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ timestamp, unixTime})
+                });
+                if (response.ok) console.log('✅ Timestamp sent to ESP32 successfully!');
+                else console.error('❌ Failed to send to ESP32');
+            } catch (error) {
+                console.error('❌ Error connecting to ESP32:', error);
+                // Still works offline - timestamp saved locally
+            }
+        }
+
+        // Confetti animation
+        function createConfetti() {
+            const colors = ['#1DB954', '#667eea', '#764ba2', '#ff6b6b', '#ffd93d'];
+            const confettiCount = 50;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.width = '10px';
+                    confetti.style.height = '10px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.borderRadius = '50%';
+                    confetti.style.pointerEvents = 'none';
+                    confetti.style.zIndex = '9999';
+                    confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 50);
+            }
+        }
+
+        // Add fall animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(${Math.random() * 360}deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
