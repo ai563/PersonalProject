@@ -116,45 +116,270 @@
             padding: 40px 32px;
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(180deg, #1e3a5f 0%, #000 400px);
-            padding: 80px 32px 40px;
-            text-align: center;
-            margin: -40px -32px 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(29, 185, 84, 0.2), transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+        /* playlist header */
+        .playlist-header {
+            display: flex;
+            flex-direction: row;
+            gap: 32px;
+            padding: 40px;
+            background: linear-gradient(180deg, rgba(30, 58, 95, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
+            margin-bottom: 40px;
+            align-items: flex-end;
+            justify-content: flex-start;
         }
 
         .playlist-cover {
-            width: 280px;
-            height: 280px;
-            margin: 0 auto 32px;
+            width: 232px; /* 232px */
+            height: 232px; /* 232px */
+            border-radius: 8px; /* keep */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); /* 0 8px 24px */
+            object-fit: cover; /*keep*/
+            flex-shrink: 0;
+        }
+
+        .playlist-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: flex-end;
+            flex: 0 0 auto;
+        }
+
+        .playlist-type {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .playlist-title {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1;
+            margin: 8px 0;
+        }
+
+        .playlist-description {
+            font-size: 16px;
+            color: #b3b3b3;
+            margin-bottom: 16px;
+        }
+
+        .playlist-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+
+        .dot {
+            font-size: 8px;
+        }
+
+        /* Song List Section */
+        .song-list-section {
+            padding: 0 40px;
+            margin-bottom: 60px;
+        }
+
+        .song-list-header {
+            display: grid;
+            grid-template-columns: 50px 2fr 2fr 80px;
+            gap: 16px;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 12px;
+            font-weight: 600;
+            color: #b3b3b3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .song-row {
+            display: grid;
+            grid-template-columns: 50px 2fr 2fr 80px;
+            gap: 16px;
+            padding: 12px 16px;
+            border-radius: 4px;
+            transition: background 0.2s;
+            cursor: pointer;
+            align-items: center;
+        }
+
+        .song-row:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .song-number {
+            text-align: center;
+            color: #b3b3b3;
+            font-size: 14px;
+            position:relative;
+        }
+
+        .play-icon {
+            display: none;
+            color: white;
+            font-size: 16px;
+        }
+
+        .number-text {
+            display: inline;
+        }
+
+        /* on hover, hide number and show play btn */
+        .song-row:hover .number-text {
+            display: none;
+        }
+
+        .song-row:hover .play-icon {
+            display: inline;
+        }
+
+        .song-row:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .song-title-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .song-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: white;
+        }
+
+        .song-artist {
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+
+        .song-memory {
+            font-size: 14px;
+            color: #1DB954;
+            font-style: italic;
+        }
+
+        .col-number {
+            text-align: center;
+        }
+
+        .col-duration {
+            text-align: right;
+            justify-self: end;
+        }
+
+        .song-duration {
+            text-align: right;
+            color: #b3b3b3;
+            font-size: 14px;
+        }
+
+        /* Recommendation Section */
+        .recommendation-section {
+            padding: 0 40px 60px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .recommendation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 600px;
+        }
+
+        .recommendation-card {
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .recommendation-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .rec-cover {
+            width: 100%;
+            aspect-ratio: 1;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 80px;
-            position: relative;
+            font-size: 48px;
+            margin-bottom: 16px;
+            object-fit: cover;
+        }
+
+        .rec-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .rec-subtitle {
+            font-size: 12px;
+            color: #b3b3b3;
+        }
+
+        /* Question Section */
+        .question-section {
+            display: none;
+            text-align: center;
+            padding: 80px 20px;
             animation: fadeInScale 1s ease-out;
+        }
+
+        .question-section.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .playlist-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .playlist-title {
+                font-size: 32px;
+            }
+
+            .song-list-header {
+                display: none;
+            }
+
+            .song-row {
+                grid-template-columns: 40px 1fr;
+                gap: 12px;
+            }
+
+            .song-memory,
+            .song-duration {
+                display: none;
+            }
+
+            .recommendation-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .rec-cover {
+                font-size: 48px;
+            }
         }
 
         @keyframes fadeInScale {
@@ -168,21 +393,6 @@
             }
         }
 
-        .playlist-title {
-            font-size: 48px;
-            font-weight: 900;
-            margin-bottom: 16px;
-            position: relative;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .playlist-subtitle {
-            font-size: 18px;
-            color: #b3b3b3;
-            position: relative;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -194,90 +404,6 @@
             }
         }
 
-        /* Sections Container */
-        .sections {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .section {
-            margin-bottom: 60px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .section:nth-child(1) { animation-delay: 0.7s; }
-        .section:nth-child(2) { animation-delay: 1.2s; }
-        .section:nth-child(3) { animation-delay: 1.7s; }
-        .section:nth-child(4) { animation-delay: 2.2s; }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 24px;
-            color: #1DB954;
-        }
-
-        /* Song List */
-        .song-list {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
-        }
-
-        .song-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 12px;
-            border-radius: 8px;
-            transition: background 0.2s;
-            cursor: pointer;
-        }
-
-        .song-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .song-number {
-            width: 24px;
-            text-align: center;
-            color: #b3b3b3;
-            font-size: 14px;
-        }
-
-        .song-info {
-            flex: 1;
-        }
-
-        .song-name {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .song-artist {
-            font-size: 14px;
-            color: #b3b3b3;
-        }
-
-        .song-memory {
-            font-size: 13px;
-            color: #1DB954;
-            font-style: italic;
-            margin-top: 4px;
-        }
-
-        /* Memory Text */
-        .memory-text {
-            background: linear-gradient(135deg, rgba(29, 185, 84, 0.1), rgba(102, 126, 234, 0.1));
-            border-left: 4px solid #1DB954;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 24px 0;
-            line-height: 1.8;
-        }
 
         /* The Question Section */
         .question-section {
@@ -503,116 +629,269 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <img class="playlist-cover" src="cat.gif" alt="cover photo">
-        <h1 class="playlist-title">hey lover!</h1>
-        <p class="playlist-subtitle">a special playlist for my bratty princess</p>
-    </div>
-
     <!-- Main Content -->
     <div class="content">
-        <div class="sections" id="sections">
-            
-            <!-- Section 1: The Songs We Shared -->
-            <div class="section">
-                <h2 class="section-title">🎵 Songs</h2>
-                <div class="song-list">
-                    <!-- 
-                        ⭐ TO ADD YOUR SONGS:
-                        1. Replace "Song Name" with the actual song title
-                        2. Replace "Artist Name" with the artist
-                        3. Replace the memory text with your actual memory
-                        4. Optional: Add the Spotify link by wrapping the song-item div with:
-                           <a href="YOUR_SPOTIFY_LINK" target="_blank" style="text-decoration: none; color: inherit;">
-                    -->
-                    <a href="https://open.spotify.com/playlist/0Ql0NosDC5sQdgNSrxGu6t?si=8949b094405d4e16" target="_blank" style="text-decoration: none; color: inherit;">
-                        <div class="song-item">
-                            <div class="song-number">1</div>
-                            <div class="song-info">
-                                <div class="song-name">carrot anti type beat</div>
-                                <div class="song-artist">by nugs</div>
-                                <div class="song-memory">i love love love this. and you xd</div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="https://open.spotify.com/track/6VsvKPJ4xjVNKpI8VVZ3SV?si=c492ad3d85854240" target="_blank" style="text-decoration: none; color: inherit;">
-                        <div class="song-item">
-                            <div class="song-number">2</div>
-                            <div class="song-info">
-                                <div class="song-name">Invisible String</div>
-                                <div class="song-artist">by Taylor Swift</div>
-                                <div class="song-memory">Time, mystical time..</div>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="song-item">
-                        <div class="song-number">3</div>
-                        <div class="song-info">
-                            <div class="song-name">i'm perfect for you</div>
-                            <div class="song-artist">by aj</div>
-                            <div class="song-memory">i'll love you like you need me to</div>
-                        </div>
+        <div class="playlist-header">
+            <img class="playlist-cover" src="cat.gif" alt="cover-photo">
+            <div class="playlist-info">
+                <p class="playlist-type">PLAYLIST</p>
+                <h1 class="playlist-title">hey lover!</h1>
+                <p class="playlist-description">a special playlist for my bratty princess <3</p>
+                <div class="playlist-meta">
+                    <span class="creator">by aj</span>
+                    <span class="dot">•</span>
+                    <span class="song-count">13 songs</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- main song list-->
+        <a class="song-list-section">
+            <div class="song-list-header">
+                <div class="col-number">#</div>
+                <div class="col-title">title</div>
+                <div class="col-memory">plays</div>
+                <div class="col-duration">⏱</div> 
+            </div>
+
+            <!-- add songs here-->
+            <a href="https://open.spotify.com/track/6VsvKPJ4xjVNKpI8VVZ3SV?si=c492ad3d85854240" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">1</span>
+                        <span class="play-icon">▶</span>
                     </div>
+                    <div class="song-title-info">
+                        <div class="song-name">Invisible String</div>
+                        <div class="song-artist">Taylor Swift</div>
+                    </div>
+                    <div class="song-memory">time, mystical time..</div>
+                    <div class="song-duration">4:12</div>
                 </div>
-            </div>
+            </a>
 
-            <!-- Section 2: Memories -->
-            <div class="section">
-                <h2 class="section-title">💭 some of the stuff i have noted down over the past months...</h2>
-                <div class="memory-text">
-                    The first time I heard you sing... instantly became my favorite song...                  
+            <a href="https://open.spotify.com/track/1ITJTMrS4cx8zdlI7DdSoo?si=429e4611ceae4d62" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">2</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="song-title-info">
+                        <div class="song-name">Me & You ◑</div>
+                        <div class="song-artist">HONNE, Tom Misch</div>
+                    </div>
+                    <div class="song-memory">you came into my life with no warning</div>
+                    <div class="song-duration">4:03</div>
                 </div>
-                <div class="memory-text">
-                    27-10-2026
-                    I like you so much that I want to keep learning more things about you, what interests you, the stuff you like and don't like.
-                    Not just the surface level things, but of course the small details too. I'm genuinely interested in you and I want to understand you better.
-                </div>
-            </div>
+            </a>
 
-            <!-- Section 3: What You Mean to Me -->
-            <div class="section">
-                <h2 class="section-title">What You Mean to Me</h2>
-                <div class="memory-text">
-                    <!-- ⭐ CUSTOMIZE THIS: Express your feelings -->
-                    Talking to you has become my favorite part of every day. You make me smile 
-                    in ways I didn't think were possible through a screen. You're thoughtful, 
-                    funny, caring, and genuinely one of the most amazing people I've ever met.
+            <a href="https://open.spotify.com/track/5xEPUpkAaWBNEDWXlMMGOn?si=be0f0ce528034ca8" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">3</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="song-title-info">
+                        <div class="song-name">Maybe?</div>
+                        <div class="song-artist">RADi</div>
+                    </div>
+                    <div class="song-memory">maybe it's you i've been waiting for</div>
+                    <div class="song-duration">2:54</div>
                 </div>
-            </div>
+            </a>
 
-            <!-- Section 4: Leading to the Question -->
-            <div class="section">
-                <h2 class="section-title">and so...</h2>
-                <div class="memory-text">
-                    <!-- ⭐ CUSTOMIZE THIS: Your lead-in to the question -->
-                    I've been thinking about this for a while now, and I couldn't find a better 
-                    way to ask than through something we both love. So here it goes...
+            <a href="https://open.spotify.com/track/5E02BgqYNN9VzafXrYP6Np?si=a3c4ade6bbe145ca" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">4</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="song-title-info">
+                        <div class="song-name">Heavenly</div> <!-- #11-->
+                        <div class="song-artist">Cigarettes After Sex</div>
+                    </div>
+                    <div class="song-memory">this is where i want to be</div>
+                    <div class="song-duration">4:47</div>
                 </div>
-            </div>
+            </a>
+
+            <a href="https://open.spotify.com/track/2q6InS8x7JMSj9A4aWR0VJ?si=210831f48a0e4afd" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">5</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="song-title-info">
+                        <div class="song-name">Falling For You</div>
+                        <div class="song-artist">Tom Misch</div>
+                    </div>
+                    <div class="song-memory">i wanna be with you in every way</div>
+                    <div class="song-duration">4:06</div>
+                </div>
+            </a>
+
+            <a href="https://open.spotify.com/track/0zIuHmVNplQtTvYd3jxF31?si=8cca7baac77b477f" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">6</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="song-title-info">
+                        <div class="song-name">want you more</div>
+                        <div class="song-artist">AMAKA</div>
+                    </div>
+                    <div class="song-memory">one thing i know for sure</div>
+                    <div class="song-duration">4:34</div>
+                </div>
+            </a>
+
+            <a href="https://open.spotify.com/track/5Y6KVqFrsZDIkKBC6K7QQ4?si=fa8b81c83c6d4b3d" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">7</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="song-title-info">
+                        <div class="song-name">Down for You</div>
+                        <div class="song-artist">Cosmo's Midnight, Ruel</div>
+                    </div>
+                    <div class="song-memory">i'm so down for you</div>
+                    <div class="song-duration">3:14</div>
+                </div>
+            </a>
+
+            <a href="https://open.spotify.com/track/36h1hoNVjKcsLUH2NzGmPj?si=337a0eb933984340" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">8</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="song-title-info">
+                        <div class="song-name">Made to Fall in Love</div> <!-- #10?-->
+                        <div class="song-artist">Daniel Caesar</div>
+                    </div>
+                    <div class="song-memory">will you cling to me, my love?</div>
+                    <div class="song-duration">4:53</div>
+                </div>
+            </a>
+
+            <a href="https://open.spotify.com/track/0dCDBADaqgcQ62LdyRsejn?si=82be1e2541494cdd" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">9</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="song-title-info">
+                        <div class="song-name">Home</div>
+                        <div class="song-artist">Reese Lansangan</div>
+                    </div>
+                    <div class="song-memory">my heart can rest knowing it belongs to you</div>
+                    <div class="song-duration">5:34</div>
+                </div>
+            </a>
+
+            <a href="https://open.spotify.com/track/5GjisoOfsN8qagrax01T4y?si=87572175b6ae4675" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">10</span> 
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="song-title-info">
+                        <div class="song-name">Wanna Be</div> <!-- #13-->
+                        <div class="song-artist">The Internet</div>
+                    </div>
+                    <div class="song-memory">don't you wanna be my girl?</div>
+                    <div class="song-duration">4:27</div>
+                </div>
+            </a>
+
+            <a href="https://open.spotify.com/track/6IPwKM3fUUzlElbvKw2sKl?si=a2be723c73404b98" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">11</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="song-title-info">
+                        <div class="song-name">we fell in love in october</div> <!-- #3-->
+                        <div class="song-artist">Girl in Red</div>
+                    </div>
+                    <div class="song-memory">you look so pretty and i love this view</div> <!-- or you will be my world/girl-->
+                    <div class="song-duration">3:04</div>
+                </div>
+            </a>
+
+            <a href="https://open.spotify.com/track/1MzUTezJeXRqFRWBpa3U9m?si=7746e49c3fa44945" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">12</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="song-title-info">
+                        <div class="song-name">Happiest Girl</div>
+                        <div class="song-artist">Stephen Dawes</div>
+                    </div>
+                    <div class="song-memory">i wanna make you the happiest girl in the world</div>
+                    <div class="song-duration">2:48</div>
+                </div>
+            </a>
+
+            <a href="https://open.spotify.com/track/4y5bvROuBDPr5fuwXbIBZR?si=0cbb238cee784498" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-row">
+                    <div class="song-number">
+                        <span class="number-text">13</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="song-title-info">
+                        <div class="song-name">Paper Rings</div> <!-- #12 -->
+                        <div class="song-artist">Taylor Swift</div>
+                    </div>
+                    <div class="song-memory">darling, you're the one i want</div>
+                    <div class="song-duration">3:42</div>
+                </div>
+            </a>
 
         </div>
 
-        <!-- The Question -->
+        <!-- you might also like section-->
+        <div class="recommendation-section">
+            <h2 class="section-title">you might also like...ₘₑ</h2>
+            <div class="recommendation-grid">
+
+                <!--first song card that triggers the question -->
+                <div class="recommendation-card" onclick="showQuestion()">
+                    <img class="rec-cover" src="cat.gif" alt="cover-photo">
+                    <div class="rec-title">i'm perfect for you</div>
+                    <div class="rec-subtitle">by aj</div>
+                </div>
+
+                <!-- second card for funsies -->
+                <a href="https://open.spotify.com/playlist/0Ql0NosDC5sQdgNSrxGu6t?si=8949b094405d4e16" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="recommendation-card">
+                        <img class="rec-cover" src="cat.gif" alt="cover-photo">
+                        <div class="rec-title">carrot anti type beat</div>
+                        <div class="rec-subtitle">by nugs my love so sweet</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+        <!--question screen-->
         <div class="question-section" id="questionSection">
             <div class="now-playing">🎵 Now Playing 🎵</div>
-            <h1 class="question-text">Will you be my girlfriend?</h1>
+            <h1 class="question-text">will you be my girlfriend?</h1>
             <div class="buttons-container">
                 <button class="answer-btn btn-yes" onclick="handleAnswer('yes')">YES</button>
-                <button class="answer-btn btn-no" onclick="handleAnswer('no')">NO >:(</button>
+                <button class="answer-btn btn-no" onclick="handleAnswer('no')">FUCK NO</button>
             </div>
         </div>
 
-        <!-- Success Screen -->
+        <!-- success screen -->
         <div class="success-screen" id="successScreen">
-            <!-- <div id="gifContainer" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1;"></div>" -->
-            
-            <!-- main content on top of gifs-->
-            <!-- <div style="position: relative; z-index: 2;"> -->
             <div class="celebration">🎉💕🎊</div>
-            <h1 class="success-title">YIPPPIEEEEE!!!!!</h1>
-            <p style="font-size: 24px; color: #b3b3b3; margin-top: 24px;">
-                period no erase padlock tapon susi
+            <h1 class="success-title">YIPPPIEEEEE💕!!!!!!1!</h1>
+            <p style="font-size: 15px; color: #b3b3b3; margin-top: 24px;">
+                period no erase padlock tapon susi <3
             </p>
         </div>
     </div>
@@ -638,6 +917,19 @@
             }
         });
 
+        function showQuestion() {
+            // hide everything else
+            document.querySelector('.playlist-header').style.display = 'none';
+            document.querySelector('.song-list-section').style.display = 'none';
+            document.querySelector('.recommendation-section').style.display = 'none';
+
+            // show question
+            document.getElementById('questionSection').classList.add('active');
+
+            // scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth'});
+        }
+
         // Handle answer
         async function handleAnswer(answer) {
             if (answer === 'yes') {
@@ -659,71 +951,6 @@
                 createConfetti();
             } else {
                 alert('bawal nb magtanong ngaun xddd ang kapal naman ng mukha ko </3');
-            }
-        }
-
-        // Scatter random GIFs across the screen
-        function scatterRandomGifs() {
-            const gifLinks = [
-                'https://media.giphy.com/media/g9582DNuQppxC/giphy.gif',
-                'https://media.giphy.com/media/artj92V8o75VPL7AeQ/giphy.gif',  // Heart celebration
-                'https://media.giphy.com/media/KYElw07kzDspaBOwf9/giphy.gif',  // Excited celebration
-                'https://media.giphy.com/media/26u4cqiYI30juCOGY/giphy.gif',  // Fireworks
-                'https://media.giphy.com/media/26tPnAAJxXTvpLwJy/giphy.gif',  // Happy dance
-                'https://media.giphy.com/media/3oz8xAFtqoOUUrsh7W/giphy.gif',  // Love celebration
-                'https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif',  // Yes!
-                'https://media.giphy.com/media/xUOxf0R43Ch2RMO2zK/giphy.gif',  // Confetti
-
-                // option 2: use uploaded gifs
-                // 'gif1.gif',
-                // 'gif2.gif', 
-                // can upload directly to github like cat.gif
-            ];
-
-            // random gif pick
-            const container = document.getElementById('gifContainer');
-            // const numberOfGifs = 8; // adjust to the number of uploaded gifs
-
-            if (container) {
-                container.innerHTML = '';
-            }
-
-            const numberOfGifs = 8; 
-
-            for(let i = 0; i < numberOfGifs; i++) {
-                const randomGif = gifLinks[Math.floor(Math.random() * gifLinks.length)];
-
-                // create gif element
-                const gif = document.createElement('img');
-                gif.src = scatterRandomGifs
-                gif.className = 'floating-gif';
-
-                // random size
-                const size = Math.random() * 100 + 50;
-                gif.style.width = size + 'px';
-                gif.style.height = size + 'px';
-                gif.style.objectFit = 'contain';
-                gif.style.borderRadius = '12px';
-
-                // random position  on screen
-                gif.style.left = Math.random() * 85 + '%'; // 0-85% from left
-                gif.style.top = Math.random() * 80 + '%'; // 0-85% from left
-
-                //random delay  for animation
-                gif.style.animationDelay = (Math.random() * 0.5) + 's';
-
-                // add to container
-                if (container) {
-                    container.appendChild(gif);
-                }
-
-                (function(gifElement) {
-                    setTimeout(() => {
-                        if (gifElement && gifElement.style) {
-                            gifElement.style.animation = 'fadeInFloat 2s ease-out forwards, float 3s ease-in-out infinite'
-                        } 
-                }, 100);
-                })(gif);
             }
         }
 
