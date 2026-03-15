@@ -495,7 +495,7 @@
             gap: 0px;
             justify-content: center;
             align-items: center;
-            margin-bottom: 32px;
+            margin-bottom: 5px;
         }
 
         .celebration-gifs img {
@@ -928,7 +928,7 @@
 
     <script>
         // ⭐⭐⭐ IMPORTANT: CONFIGURE YOUR ESP32 IP ADDRESS HERE ⭐⭐⭐
-        const ESP32_IP = 'http://192.168.1.237'; // Change this to your ESP32's IP address
+        const ESP32_IP = 'https://unwalked-unelementary-lakenya.ngrok-free.dev'; // http://192.168.1.237 // Change this to your ESP32's IP address
         
         let officialTimestamp = null;
 
@@ -1020,7 +1020,7 @@
         // Confetti animation
         function createConfetti() {
             const colors = ['#1DB954', '#667eea', '#764ba2', '#ff6b6b', '#ffd93d'];
-            const confettiCount = 50;
+            const confettiCount = 250;
             
             for (let i = 0; i < confettiCount; i++) {
                 setTimeout(() => {
@@ -1034,11 +1034,14 @@
                     confetti.style.borderRadius = '50%';
                     confetti.style.pointerEvents = 'none';
                     confetti.style.zIndex = '9999';
-                    confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
                     
                     document.body.appendChild(confetti);
+
+                    confetti.offsetHeight;
+
+                    confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
                     
-                    setTimeout(() => confetti.remove(), 5000);
+                    setTimeout(() => confetti.remove(), 10000);
                 }, i * 50);
             }
         }
@@ -1047,10 +1050,13 @@
         const style = document.createElement('style');
         style.textContent = `
             @keyframes fall {
-                to {
-                    transform: translateY(100vh) rotate(${Math.random() * 360}deg);
-                    opacity: 0;
-                }
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
             }
         `;
         document.head.appendChild(style);
