@@ -19,7 +19,7 @@
             overflow-x: hidden;
         }
 
-        /* header logo */
+        /* Spotify Header */
         .spotify-header {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
@@ -109,7 +109,7 @@
             font-weight: bold;
         }
 
-        /* Main content */
+        /* Main Content */
         .content {
             max-width: 1400px;
             margin: 0 auto;
@@ -177,7 +177,7 @@
             font-size: 8px;
         }
 
-        /* Song list */
+        /* Song List Section */
         .song-list-section {
             padding: 0 40px;
             margin-bottom: 60px;
@@ -229,7 +229,7 @@
             display: inline;
         }
 
-        /* hide number and show play btn on hover over song #*/
+        /* on hover, hide number and show play btn */
         .song-row:hover .number-text {
             display: none;
         }
@@ -280,7 +280,7 @@
             font-size: 14px;
         }
 
-        /* Reco section */
+        /* Recommendation Section */
         .recommendation-section {
             padding: 0 40px 60px;
         }
@@ -335,7 +335,7 @@
             color: #b3b3b3;
         }
 
-        /* Question screen */
+        /* Question Section */
         .question-section {
             display: none;
             text-align: center;
@@ -431,7 +431,7 @@
             font-weight: 900;
             line-height: 1.2;
             margin-bottom: 48px;
-            background: linear-gradient(135deg, #1DB954, #667eea);
+            background: linear-gradient(135deg, #089b3b, #df66ea);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -478,7 +478,7 @@
             transform: scale(1.05);
         }
 
-        /* Success screen */
+        /* Success Screen */
         .success-screen {
             display: none;
             text-align: center;
@@ -506,7 +506,7 @@
             animation: bounce 1s ease-in-out infinite;
         }
 
-        /* removed - uncomment if needed
+        /*
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
@@ -547,7 +547,7 @@
             }
         }
 
-        /* Scroll indicator */
+        /* Scroll Indicator */
         .scroll-indicator {
             position: fixed;
             bottom: 40px;
@@ -899,7 +899,15 @@
 
         <!--question screen-->
         <div class="question-section" id="questionSection">
-            <div class="now-playing">🎵 Now Playing 🎵</div>
+            <div class="now-playing">
+                <svg viewBox="0 0 16 16" width="16" height="16" fill="#1DB954" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                    <path d="M13.426 2.574a2.831 2.831 0 0 0-.203-.64c-.06-.127-.13-.243-.216-.35a2.212 2.212 0 0 0-.32-.31 2.773 2.773 0 0 0-.468-.27c-.108-.05-.22-.09-.336-.122a3.001 3.001 0 0 0-.372-.055 2.85 2.85 0 0 0-.398-.016c-.157.004-.313.02-.465.047a3.23 3.23 0 0 0-.3.052c-.052.01-.103.023-.154.036l-5.977 1.993A1 1 0 0 0 4 4.923v5.859a2.996 2.996 0 0 0-1-.17A3 3 0 1 0 6 13.612V6.883l6-2v3.899a2.996 2.996 0 0 0-1-.17A3 3 0 1 0 14 11.612V3a2.969 2.969 0 0 0-.574-.426z"></path>
+                </svg>
+                let's make it official... >////<
+                <svg viewBox="0 0 16 16" width="16" height="16" fill="#1DB954" style="display: inline-block; vertical-align: middle; margin-left: 8px;">
+                    <path d="M13.426 2.574a2.831 2.831 0 0 0-.203-.64c-.06-.127-.13-.243-.216-.35a2.212 2.212 0 0 0-.32-.31 2.773 2.773 0 0 0-.468-.27c-.108-.05-.22-.09-.336-.122a3.001 3.001 0 0 0-.372-.055 2.85 2.85 0 0 0-.398-.016c-.157.004-.313.02-.465.047a3.23 3.23 0 0 0-.3.052c-.052.01-.103.023-.154.036l-5.977 1.993A1 1 0 0 0 4 4.923v5.859a2.996 2.996 0 0 0-1-.17A3 3 0 1 0 6 13.612V6.883l6-2v3.899a2.996 2.996 0 0 0-1-.17A3 3 0 1 0 14 11.612V3a2.969 2.969 0 0 0-.574-.426z"></path>
+                </svg>
+            </div>
             <h1 class="question-text">will you be my girlfriend?</h1>
             <div class="buttons-container">
                 <button class="answer-btn btn-yes" onclick="handleAnswer('yes')">YES</button>
@@ -921,13 +929,13 @@
         </div>
     </div>
 
-    <!-- Scroll Indicator -->
+    <!-- Scroll indicator -->
     <div class="scroll-indicator">
         <div class="scroll-arrow"></div>
     </div>
 
     <script>
-        //  config ESP32 IP Address here.. Upload code to microcontrolelr
+        // IMPORTANT: CONFIGURE YOUR ESP32 IP ADDRESS HERE 
         const ESP32_IP = 'https://unwalked-unelementary-lakenya.ngrok-free.dev'; // http://192.168.1.237 // Change this to your ESP32's IP address
         
         let officialTimestamp = null;
@@ -966,7 +974,7 @@
                 document.getElementById('questionSection').style.display = 'none';
                 document.getElementById('successScreen').classList.add('active');
 
-                // scatter random GIFs - removed - changed from scattered gifs to single liner
+                // scatter random GIFs
                 // scatterRandomGifs();
                 
                 // Send to ESP32
